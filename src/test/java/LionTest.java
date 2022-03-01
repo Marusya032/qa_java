@@ -13,8 +13,8 @@ public class LionTest {
     private final String sex;
     private final boolean typeGender;
     IFeline ifeline;
-    public LionTest(String gender, boolean typeGender) {
-        this.sex = gender;
+    public LionTest(String sex, boolean typeGender) {
+        this.sex = sex;
         this.typeGender = typeGender;
     }
 
