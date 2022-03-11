@@ -11,13 +11,14 @@ import static org.junit.Assert.assertEquals;
 public class CatTest {
 
     @Mock
-    private Feline feline ;
+    Feline feline ;
 
     @Test
     public void getFoodReturnsCorrectValue() throws Exception{
         Cat cat = new Cat(feline);
         List<String> catFood = List.of("Животные", "Птицы", "Рыба");
-        Mockito.when(feline.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
+
+        Mockito.when(feline.eatMeat()).thenReturn(catFood);
         List<String> actualCatFood = cat.getFood();
         assertEquals(catFood, actualCatFood);
     }

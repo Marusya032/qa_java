@@ -4,11 +4,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class FelineTest {
+    Feline feline = new Feline();
 
     @Test
     public void getFamilyReturnsCorrectValue(){
         String familyType = "Кошачьи";
-        Feline feline = new Feline();
         String actualFamilyType = feline.getFamily();
         assertEquals(familyType, actualFamilyType);
     }
@@ -16,7 +16,6 @@ public class FelineTest {
     @Test
     public void getKittenCountsReturnsCorrectValue(){
         int kittensCount = 1;
-        Feline feline = new Feline();
         int actualKittensCount = feline.getKittens(1);
         assertEquals(kittensCount, actualKittensCount);
     }
@@ -24,7 +23,6 @@ public class FelineTest {
     @Test
     public void getKittensReturnsCorrectValue(){
         int kittens = 1;
-        Feline feline = new Feline();
         int actualHasKittens = feline.getKittens();
         assertEquals(actualHasKittens, kittens);
     }
@@ -32,7 +30,6 @@ public class FelineTest {
     @Test
     public void getEatMeatReturnsCorrectValue() throws Exception{
         List<String>  familyType = List.of("Животные", "Птицы", "Рыба");
-        Feline feline = new Feline();
         List<String> actualFamily = feline.eatMeat();
         assertEquals(familyType, actualFamily);
     }

@@ -2,14 +2,14 @@ package com.example;
 
 import java.util.List;
 
-public class Lion extends Animal implements IFeline{
-    IFeline feline;
+public class Lion {
+    private Feline feline;
     String sex;
     boolean hasMane;
 
-    public Lion(String sex, IFeline feline) throws Exception {
-        this.feline = feline;
-        this.sex = sex;
+        public Lion(String sex, Feline feline) throws Exception {
+            this.feline = feline;
+            this.sex = sex;
 
         if ("Самец".equals(sex)) {
             hasMane = true;
@@ -20,14 +20,8 @@ public class Lion extends Animal implements IFeline{
         }
     }
 
-     @Override
     public int getKittens() {
         return feline.getKittens();
-    }
-
-    @Override
-    public int getKittens(int kittensCount) {
-        return 0;
     }
 
     public boolean doesHaveMane() {
@@ -35,9 +29,8 @@ public class Lion extends Animal implements IFeline{
     }
 
     public List<String> getFood() throws Exception {
-        return getFood("Хищник");
+        return feline.getFood("Хищник");
     }
-
 
 }
 

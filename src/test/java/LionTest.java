@@ -1,51 +1,27 @@
 import com.example.Feline;
-import com.example.IFeline;
 import com.example.Lion;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 
-@RunWith(Parameterized.class)
+@RunWith(MockitoJUnitRunner.class)
 public class LionTest {
 
-    private final String sex;
-    private final boolean typeGender;
-    IFeline ifeline;
-    public LionTest(String sex, boolean typeGender) {
-        this.sex = sex;
-        this.typeGender = typeGender;
-    }
-
-    @Parameterized.Parameters
-    public static Object[][] getParameters() {
-        return new Object[][] {
-                { "Самка", false},
-                { "Самец", true},
-                { "Другой", true},
-        };
-    }
-
-    @Test
-    public void doesHaveManeReturnsCorrectValue() throws Exception {
-
-        try {
-            Lion lion = new Lion(sex, ifeline);
-            boolean actualGenger = lion.doesHaveMane();
-            assertEquals(typeGender, actualGenger);
-        } catch (Exception thrown)
-        {
-            assertEquals("Используйте допустимые значения пола животного - самец или самка", thrown.getMessage());
-        }
-    }
+    @Mock
+    private Feline feline;
 
     @Test
     public void getKittensReturnsCorrectValue() throws Exception {
         String sex = "Самка";
-        IFeline feline = new Feline();
         Lion lion = new Lion(sex, feline);
-        int  kittensCount = 1;
+        Mockito.when(feline.getKittens()).thenReturn(1);
+        int kittensCount = 1;
         int actualKittensCount = lion.getKittens();
         assertEquals(kittensCount, actualKittensCount);
 
@@ -54,8 +30,8 @@ public class LionTest {
     @Test
     public void getFoodReturnsCorrectValue() throws Exception {
         String sex = "Самка";
-        List<String> eatLion  = List.of("Животные", "Птицы", "Рыба");
-        IFeline feline = new Feline();
+        List<String> eatLion = List.of("Животные", "Птицы", "Рыба");
+        Mockito.when(feline.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         Lion lion = new Lion(sex, feline);
         List<String> actualEatLion = lion.getFood();
         System.out.println(eatLion);
@@ -63,6 +39,22 @@ public class LionTest {
 
     }
 
-}
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
+
+    @Test
+    public void doesHaveManeReturnsCorrectValueNegativeTest() throws Exception {
+
+    Lion lion = new Lion("Другое", feline);
+        exceptionRule.expect(Exception.class);
+        exceptionRule.expectMessage("Используйте допустимые значения пола животного - самец или самка");
+        lion.doesHaveMane();
+    }}
+
+
+
+
+
+
 
 
