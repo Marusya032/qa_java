@@ -44,10 +44,9 @@ public class LionTest {
 
     @Test
     public void doesHaveManeReturnsCorrectValueNegativeTest() throws Exception {
-
-    Lion lion = new Lion("Другое", feline);
         exceptionRule.expect(Exception.class);
         exceptionRule.expectMessage("Используйте допустимые значения пола животного - самец или самка");
+        Lion lion = new Lion("Другой", feline);
         lion.doesHaveMane();
     }}
 
